@@ -30,6 +30,7 @@
 
         <!--COMMON PROPERTIES-->
         <project.tmp.directory>${project.build.directory}/tmp</project.tmp.directory>
+
         <jacoco.minimum.line.test.coverage>0.75</jacoco.minimum.line.test.coverage>
         <jacoco.minimum.branch.test.coverage>0.75</jacoco.minimum.branch.test.coverage>
         <!-- *   Match zero or more characters-->
