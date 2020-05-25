@@ -65,6 +65,8 @@
         <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
         <minimum.required.maven.version>3.6</minimum.required.maven.version>
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+        <maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
+        <checkstyle.version>8.32</checkstyle.version>
     </properties>
 
     <profiles>
@@ -205,6 +207,43 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${maven-checkstyle-plugin.version}</version>
+                    <configuration>
+                        <configLocation>checkstyle/checkstyle.xml</configLocation>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <consoleOutput>false</consoleOutput>
+                        <failsOnError>false</failsOnError>
+                        <failOnViolation>false</failOnViolation>
+                        <logViolationsToConsole>false</logViolationsToConsole>
+                        <violationSeverity>warning</violationSeverity>
+                        <linkXRef>true</linkXRef>
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>checkstyle-validate</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>${checkstyle.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.bondarenko.platform</groupId>
+                            <artifactId>platform-code-quality-java11</artifactId>
+                            <version>${platform-code-quality-java11.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
@@ -518,6 +557,9 @@
                 <artifactId>maven-enforcer-plugin</artifactId>
             </plugin>
             <plugin>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
             </plugin>
@@ -527,7 +569,5 @@
             </plugin>
         </plugins>
     </build>
-
-
 
 </project>
