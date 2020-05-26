@@ -12,108 +12,106 @@
 	<name>Platform :: Parent pom</name>
 
 	<properties>
+		<!--PLEASE KEEP ALPHABETICAL ORDER IN EACH GROUP-->
+
 		<!--PROJECT-->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.java.version>11</project.java.version>
-
-		<!--DEPENDENCIES-->
-
-		<!--PLUGINS-->
-
-		<!--PROFILE variables-->
-		<prof.skip.unit.tests>false</prof.skip.unit.tests>
-		<prof.skip.integration.tests>false</prof.skip.integration.tests>
-		<prof.skip.test.coverage.check>false</prof.skip.test.coverage.check>
-		<prof.skip.code.quality.tools>false</prof.skip.code.quality.tools>
-
-		<prof.auto.dependency.version.upgrade.phase>none</prof.auto.dependency.version.upgrade.phase>
-
-		<!--COMMON PROPERTIES-->
+		<project.minimum.maven.version>3.6</project.minimum.maven.version>
 		<project.tmp.directory>${project.build.directory}/tmp</project.tmp.directory>
 
-		<jacoco.minimum.line.test.coverage>0.75</jacoco.minimum.line.test.coverage>
-		<jacoco.minimum.branch.test.coverage>0.75</jacoco.minimum.branch.test.coverage>
+		<!--DEPENDENCIES INTERNAL-->
+		<platform-code-quality-java11.version>0.0.1-SNAPSHOT</platform-code-quality-java11.version>
+
+		<!--DEPENDENCIES EXTERNAL-->
+		<junit-bom.version>5.6.2</junit-bom.version>
+		<spring-boot-dependencies.version>2.3.0.RELEASE</spring-boot-dependencies.version>
+		<spring-framework-bom.version>5.2.6.RELEASE</spring-framework-bom.version>
+
+		<!--PLUGINS-->
+		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+		<maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
+		<maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
+		<maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+		<maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+		<maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
+		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
+		<maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+		<maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+		<maven-jxr-plugin.version>2.3</maven-jxr-plugin.version>
+		<maven-pmd-plugin.version>3.13.0</maven-pmd-plugin.version>
+		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+		<maven-site-plugin.version>3.9.0</maven-site-plugin.version>
+		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+		<versions-maven-plugin.version>2.7</versions-maven-plugin.version>
+
+		<!--PLUGIN DEPENDENCIES-->
+		<extra-enforcer-rules.version>1.2</extra-enforcer-rules.version>
+		<maven-checkstyle-plugin.checkstyle.rules.version>8.32</maven-checkstyle-plugin.checkstyle.rules.version>
+		<ossindex-maven-enforcer-rules.version>3.1.0</ossindex-maven-enforcer-rules.version>
+
+		<!--SKIPS-->
+		<jacoco-maven-plugin.skip>false</jacoco-maven-plugin.skip>
+		<maven-checkstyle-plugin.skip>false</maven-checkstyle-plugin.skip>
+		<maven-enforcer-plugin.skip>false</maven-enforcer-plugin.skip>
+		<maven-failsafe-plugin.skipTests>false</maven-failsafe-plugin.skipTests>
+		<maven-pmd-plugin.skip>false</maven-pmd-plugin.skip>
+		<maven-surefire-plugin.skipTests>false</maven-surefire-plugin.skipTests>
+
+		<!--CONFIG variables-->
+		<!--jacoco-maven-plugin-->
+		<jacoco-maven-plugin.minimum.line.coverage>0.8</jacoco-maven-plugin.minimum.line.coverage>
+		<jacoco-maven-plugin.minimum.branch.coverage>0.8</jacoco-maven-plugin.minimum.branch.coverage>
 		<!-- *   Match zero or more characters-->
 		<!-- **  Match zero or more directories-->
 		<!-- ?   Match a single character-->
-		<jacoco.excludes>
+		<jacoco-maven-plugin.excludes>
 			<!--exclude rule 1,(comma is important here)-->
 			<!--exclude rule 2-->
-		</jacoco.excludes>
-		<surefireArgLine.module/>
-		<failsafeArgLine.module/>
+		</jacoco-maven-plugin.excludes>
 
-		<maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
-		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
-		<maven-install-plugin.version>2.5.2</maven-install-plugin.version>
-		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-		<maven-site-plugin.version>3.9.0</maven-site-plugin.version>
-		<maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
-		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
-		<maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
-		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
-		<platform-code-quality-java11.version>0.0.1-SNAPSHOT</platform-code-quality-java11.version>
-		<spring-framework-bom.version>5.2.6.RELEASE</spring-framework-bom.version>
-		<spring-boot-dependencies.version>2.3.0.RELEASE</spring-boot-dependencies.version>
-		<junit-bom.version>5.6.2</junit-bom.version>
-		<maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
-		<extra-enforcer-rules.version>1.2</extra-enforcer-rules.version>
-		<ossindex-maven-enforcer-rules.version>3.1.0</ossindex-maven-enforcer-rules.version>
-		<versions-maven-plugin.version>2.7</versions-maven-plugin.version>
-		<maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
-		<minimum.required.maven.version>3.6</minimum.required.maven.version>
-		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
-		<maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
-		<checkstyle.version>8.32</checkstyle.version>
-		<maven-jxr-plugin.version>2.3</maven-jxr-plugin.version>
+		<!--maven-checkstyle-plugin-->
+		<maven-checkstyle-plugin.failOnViolation>true</maven-checkstyle-plugin.failOnViolation>
+		<maven-checkstyle-plugin.logViolationsToConsole>true</maven-checkstyle-plugin.logViolationsToConsole>
+
+		<!--maven-enforcer-plugin-->
+		<maven-enforcer-plugin.enforce-release-rules.phase>none</maven-enforcer-plugin.enforce-release-rules.phase>
+
+		<!--maven-failsafe-plugin-->
+		<maven-failsafe-plugin.argLine/>
+
+		<!--maven-pmd-plugin-->
+		<maven-pmd-plugin.failOnViolation>true</maven-pmd-plugin.failOnViolation>
+		<maven-pmd-plugin.printFailingErrors>true</maven-pmd-plugin.printFailingErrors>
+
+		<!--maven-surefire-plugin-->
+		<maven-surefire-plugin.argLine/>
+
+		<!--versions-maven-plugin-->
+		<versions-maven-plugin.dependency.version.upgrade.phase>none</versions-maven-plugin.dependency.version.upgrade.phase>
 	</properties>
 
 	<profiles>
-		<profile>
-			<id>skip-tests</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<prof.skip.unit.tests>true</prof.skip.unit.tests>
-				<prof.skip.integration.tests>true</prof.skip.integration.tests>
-				<prof.skip.test.coverage.check>true</prof.skip.test.coverage.check>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>skip-code-quality-tools</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<prof.skip.code.quality.tools>true</prof.skip.code.quality.tools>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>fast-build</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<prof.skip.unit.tests>true</prof.skip.unit.tests>
-				<prof.skip.integration.tests>true</prof.skip.integration.tests>
-				<prof.skip.test.coverage.check>true</prof.skip.test.coverage.check>
-				<prof.skip.code.quality.tools>true</prof.skip.code.quality.tools>
-			</properties>
-		</profile>
-
 		<profile>
 			<id>update-dependencies</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
-				<prof.auto.dependency.version.upgrade.phase>generate-sources
-				</prof.auto.dependency.version.upgrade.phase>
+				<versions-maven-plugin.dependency.version.upgrade.phase>generate-sources</versions-maven-plugin.dependency.version.upgrade.phase>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>release</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<maven-enforcer-plugin.enforce-release-rules.phase>validate</maven-enforcer-plugin.enforce-release-rules.phase>
 			</properties>
 		</profile>
 	</profiles>
@@ -147,6 +145,7 @@
 	<build>
 		<pluginManagement>
 			<plugins>
+
 				<plugin>
 					<artifactId>maven-clean-plugin</artifactId>
 					<version>${maven-clean-plugin.version}</version>
@@ -163,6 +162,7 @@
 						<optimize>true</optimize>
 					</configuration>
 				</plugin>
+
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>${maven-resources-plugin.version}</version>
@@ -170,30 +170,33 @@
 						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
 				</plugin>
+
 				<plugin>
 					<artifactId>maven-install-plugin</artifactId>
 					<version>${maven-install-plugin.version}</version>
 				</plugin>
+
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${maven-surefire-plugin.version}</version>
 					<configuration>
 						<!--suppress UnresolvedMavenProperty (injected by jacoco plugin)-->
-						<argLine>${surefireArgLine.module} ${surefireArgLine.jacoco}</argLine>
-						<skipTests>${prof.skip.unit.tests}</skipTests>
+						<argLine>${maven-surefire-plugin.argLine} ${jacoco-maven-plugin.surefireArgLine}</argLine>
+						<skipTests>${maven-surefire-plugin.skipTests}</skipTests>
 						<encoding>${project.build.sourceEncoding}</encoding>
 						<systemPropertyVariables>
 							<java.io.tmpdir>${project.tmp.directory}</java.io.tmpdir>
 						</systemPropertyVariables>
 					</configuration>
 				</plugin>
+
 				<plugin>
 					<artifactId>maven-failsafe-plugin</artifactId>
 					<version>${maven-failsafe-plugin.version}</version>
 					<configuration>
 						<!--suppress UnresolvedMavenProperty (injected by jacoco plugin)-->
-						<argLine>${failsafeArgLine.module} ${failsafeArgLine.jacoco}</argLine>
-						<skipTests>${prof.skip.integration.tests}</skipTests>
+						<argLine>${maven-failsafe-plugin.argLine} ${jacoco-maven-plugin.failsafeArgLine}</argLine>
+						<skipTests>${maven-failsafe-plugin.skipTests}</skipTests>
 						<encoding>${project.build.sourceEncoding}</encoding>
 						<systemPropertyVariables>
 							<java.io.tmpdir>${project.tmp.directory}</java.io.tmpdir>
@@ -210,21 +213,22 @@
 						</execution>
 					</executions>
 				</plugin>
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-checkstyle-plugin</artifactId>
 					<version>${maven-checkstyle-plugin.version}</version>
 					<configuration>
-						<configLocation>checkstyle/checkstyle.xml</configLocation>
+						<configLocation>/checkstyle/checkstyle.xml</configLocation>
 						<encoding>${project.build.sourceEncoding}</encoding>
-						<consoleOutput>false</consoleOutput>
-						<failsOnError>false</failsOnError>
-						<failOnViolation>false</failOnViolation>
-						<logViolationsToConsole>false</logViolationsToConsole>
+						<consoleOutput>true</consoleOutput>
+						<failsOnError>true</failsOnError>
+						<failOnViolation>${maven-checkstyle-plugin.failOnViolation}</failOnViolation>
+						<logViolationsToConsole>${maven-checkstyle-plugin.logViolationsToConsole}</logViolationsToConsole>
 						<violationSeverity>warning</violationSeverity>
 						<linkXRef>true</linkXRef>
 						<includeTestSourceDirectory>true</includeTestSourceDirectory>
-						<skip>true</skip>
+						<skip>${maven-checkstyle-plugin.skip}</skip>
 					</configuration>
 					<executions>
 						<execution>
@@ -239,7 +243,7 @@
 						<dependency>
 							<groupId>com.puppycrawl.tools</groupId>
 							<artifactId>checkstyle</artifactId>
-							<version>${checkstyle.version}</version>
+							<version>${maven-checkstyle-plugin.checkstyle.rules.version}</version>
 						</dependency>
 						<dependency>
 							<groupId>com.bondarenko.platform</groupId>
@@ -248,20 +252,23 @@
 						</dependency>
 					</dependencies>
 				</plugin>
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-pmd-plugin</artifactId>
-					<version>3.13.0</version>
+					<version>${maven-pmd-plugin.version}</version>
 					<configuration>
-						<skip>true</skip>
-						<linkXref>true</linkXref>
+						<skip>${maven-pmd-plugin.skip}</skip>
+						<linkXRef>true</linkXRef>
 						<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
 						<minimumTokens>100</minimumTokens>
 						<targetJdk>${project.java.version}</targetJdk>
+						<printFailingErrors>${maven-pmd-plugin.printFailingErrors}</printFailingErrors>
+						<failOnViolation>${maven-pmd-plugin.failOnViolation}</failOnViolation>
+						<includeTests>true</includeTests>
 						<rulesets>
 							<ruleset>/pmd/ruleset.xml</ruleset>
 						</rulesets>
-						<printFailingErrors>true</printFailingErrors>
 					</configuration>
 					<executions>
 						<execution>
@@ -278,12 +285,13 @@
 						</dependency>
 					</dependencies>
 				</plugin>
+
 				<plugin>
 					<groupId>org.jacoco</groupId>
 					<artifactId>jacoco-maven-plugin</artifactId>
 					<version>${jacoco-maven-plugin.version}</version>
 					<configuration>
-						<skip>true</skip>
+						<skip>${jacoco-maven-plugin.skip}</skip>
 					</configuration>
 					<executions>
 						<!--UNIT TESTS-->
@@ -294,7 +302,7 @@
 								<goal>prepare-agent</goal>
 							</goals>
 							<configuration>
-								<propertyName>surefireArgLine.jacoco</propertyName>
+								<propertyName>jacoco-maven-plugin.surefireArgLine</propertyName>
 							</configuration>
 						</execution>
 
@@ -314,7 +322,7 @@
 								<goal>prepare-agent</goal>
 							</goals>
 							<configuration>
-								<propertyName>failsafeArgLine.jacoco</propertyName>
+								<propertyName>jacoco-maven-plugin.failsafeArgLine</propertyName>
 							</configuration>
 						</execution>
 
@@ -340,31 +348,34 @@
 											<limit>
 												<counter>LINE</counter>
 												<value>COVEREDRATIO</value>
-												<minimum>${jacoco.minimum.line.test.coverage}</minimum>
+												<minimum>${jacoco-maven-plugin.minimum.line.coverage}</minimum>
 											</limit>
 											<limit>
 												<counter>BRANCH</counter>
 												<value>COVEREDRATIO</value>
-												<minimum>${jacoco.minimum.branch.test.coverage}</minimum>
+												<minimum>${jacoco-maven-plugin.minimum.branch.coverage}</minimum>
 											</limit>
 										</limits>
 									</rule>
 								</rules>
 								<excludes>
-									<exclude>${jacoco.excludes}</exclude>
+									<exclude>${jacoco-maven-plugin.excludes}</exclude>
 								</excludes>
 							</configuration>
 						</execution>
 					</executions>
 				</plugin>
+
 				<plugin>
 					<artifactId>maven-site-plugin</artifactId>
 					<version>${maven-site-plugin.version}</version>
 				</plugin>
+
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>${maven-jar-plugin.version}</version>
 				</plugin>
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
@@ -383,6 +394,7 @@
 						</execution>
 					</executions>
 				</plugin>
+
 				<plugin>
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>${maven-javadoc-plugin.version}</version>
@@ -396,6 +408,7 @@
 						</execution>
 					</executions>
 				</plugin>
+
 				<plugin>
 					<artifactId>maven-deploy-plugin</artifactId>
 					<version>${maven-deploy-plugin.version}</version>
@@ -409,6 +422,7 @@
 						</execution>
 					</executions>
 				</plugin>
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-antrun-plugin</artifactId>
@@ -429,12 +443,13 @@
 						</execution>
 					</executions>
 				</plugin>
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
 					<version>${maven-enforcer-plugin.version}</version>
 					<configuration>
-						<skip>true</skip>
+						<skip>${maven-enforcer-plugin.skip}</skip>
 						<failFast>true</failFast>
 					</configuration>
 					<executions>
@@ -468,7 +483,7 @@
 
 									<!--enforces the Maven version-->
 									<requireMavenVersion>
-										<version>${minimum.required.maven.version}</version>
+										<version>${project.minimum.maven.version}</version>
 									</requireMavenVersion>
 
 									<!--verifies that there are no duplicate classes in the dependencies-->
@@ -490,11 +505,11 @@
 							</configuration>
 						</execution>
 						<execution>
-							<id>enforce-release-rules</id>
+							<id>enforce-release-version-rules</id>
+							<phase>${maven-enforcer-plugin.enforce-release-rules.phase}</phase>
 							<goals>
 								<goal>enforce</goal>
 							</goals>
-							<phase>none</phase>
 							<configuration>
 								<rules>
 									<!--enforces that the artifact is not a snapshot-->
@@ -518,6 +533,7 @@
 						</dependency>
 					</dependencies>
 				</plugin>
+
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>versions-maven-plugin</artifactId>
@@ -533,7 +549,7 @@
 								<goal>update-child-modules</goal>
 								<goal>commit</goal>
 							</goals>
-							<phase>${prof.auto.dependency.version.upgrade.phase}</phase>
+							<phase>${versions-maven-plugin.dependency.version.upgrade.phase}</phase>
 							<configuration>
 								<allowSnapshots>true</allowSnapshots>
 							</configuration>
@@ -545,7 +561,7 @@
 								<goal>update-properties</goal>
 								<goal>commit</goal>
 							</goals>
-							<phase>${prof.auto.dependency.version.upgrade.phase}</phase>
+							<phase>${versions-maven-plugin.dependency.version.upgrade.phase}</phase>
 						</execution>
 					</executions>
 					<dependencies>
@@ -556,11 +572,13 @@
 						</dependency>
 					</dependencies>
 				</plugin>
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jxr-plugin</artifactId>
 					<version>${maven-jxr-plugin.version}</version>
 				</plugin>
+
 			</plugins>
 		</pluginManagement>
 
