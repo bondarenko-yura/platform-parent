@@ -31,6 +31,7 @@
 		<!--PLUGINS-->
 		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
 		<maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
+		<maven-changes-plugin.version>2.12.1</maven-changes-plugin.version>
 		<maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
 		<maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -49,10 +50,9 @@
 		<spotbugs-maven-plugin.version>4.0.0</spotbugs-maven-plugin.version>
 		<versions-maven-plugin.version>2.7</versions-maven-plugin.version>
 
-		<!--PLUGIN DEPENDENCIES-->
-
 		<!--SKIPS-->
 		<jacoco-maven-plugin.skip>false</jacoco-maven-plugin.skip>
+		<maven-changes-plugin.skip>false</maven-changes-plugin.skip>
 		<maven-checkstyle-plugin.skip>false</maven-checkstyle-plugin.skip>
 		<maven-enforcer-plugin.skip>false</maven-enforcer-plugin.skip>
 		<maven-failsafe-plugin.skipTests>false</maven-failsafe-plugin.skipTests>
@@ -223,7 +223,6 @@
 				</plugin>
 
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-checkstyle-plugin</artifactId>
 					<version>${maven-checkstyle-plugin.version}</version>
 					<configuration>
@@ -262,7 +261,6 @@
 				</plugin>
 
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-pmd-plugin</artifactId>
 					<version>${maven-pmd-plugin.version}</version>
 					<configuration>
@@ -419,7 +417,6 @@
 				</plugin>
 
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
 					<version>${maven-source-plugin.version}</version>
 					<configuration>
@@ -466,7 +463,6 @@
 				</plugin>
 
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-antrun-plugin</artifactId>
 					<version>${maven-antrun-plugin.version}</version>
 					<executions>
@@ -487,7 +483,6 @@
 				</plugin>
 
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
 					<version>${maven-enforcer-plugin.version}</version>
 					<configuration>
@@ -616,9 +611,30 @@
 				</plugin>
 
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jxr-plugin</artifactId>
 					<version>${maven-jxr-plugin.version}</version>
+				</plugin>
+
+				<plugin>
+					<artifactId>maven-changes-plugin</artifactId>
+					<version>${maven-changes-plugin.version}</version>
+					<configuration>
+						<skip>${maven-changes-plugin.skip}</skip>
+						<inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+						<outputEncoding>${project.build.sourceEncoding}</outputEncoding>
+						<failOnError>true</failOnError>
+						<runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
+					</configuration>
+					<executions>
+						<execution>
+							<id>check-changes</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>changes-check</goal>
+								<goal>changes-validate</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 
 			</plugins>
@@ -662,6 +678,9 @@
 				<artifactId>maven-pmd-plugin</artifactId>
 			</plugin>
 			<plugin>
+				<artifactId>maven-changes-plugin</artifactId>
+			</plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
 			</plugin>
@@ -680,6 +699,16 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-jxr-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-changes-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>changes-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 		</plugins>
 	</reporting>
