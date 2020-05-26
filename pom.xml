@@ -40,7 +40,7 @@
 		<maven-install-plugin.version>2.5.2</maven-install-plugin.version>
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 		<maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
-		<maven-jxr-plugin.version>2.3</maven-jxr-plugin.version>
+		<maven-jxr-plugin.version>2.5</maven-jxr-plugin.version>
 		<maven-pmd-plugin.version>3.13.0</maven-pmd-plugin.version>
 		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
 		<maven-site-plugin.version>3.9.0</maven-site-plugin.version>
@@ -49,9 +49,6 @@
 		<versions-maven-plugin.version>2.7</versions-maven-plugin.version>
 
 		<!--PLUGIN DEPENDENCIES-->
-		<extra-enforcer-rules.version>1.2</extra-enforcer-rules.version>
-		<maven-checkstyle-plugin.checkstyle.rules.version>8.32</maven-checkstyle-plugin.checkstyle.rules.version>
-		<ossindex-maven-enforcer-rules.version>3.1.0</ossindex-maven-enforcer-rules.version>
 
 		<!--SKIPS-->
 		<jacoco-maven-plugin.skip>false</jacoco-maven-plugin.skip>
@@ -76,9 +73,12 @@
 		<!--maven-checkstyle-plugin-->
 		<maven-checkstyle-plugin.failOnViolation>true</maven-checkstyle-plugin.failOnViolation>
 		<maven-checkstyle-plugin.logViolationsToConsole>true</maven-checkstyle-plugin.logViolationsToConsole>
+		<maven-checkstyle-plugin.checkstyle.rules.version>8.32</maven-checkstyle-plugin.checkstyle.rules.version>
 
 		<!--maven-enforcer-plugin-->
 		<maven-enforcer-plugin.enforce-release-rules.phase>none</maven-enforcer-plugin.enforce-release-rules.phase>
+		<extra-enforcer-rules.version>1.2</extra-enforcer-rules.version>
+		<ossindex-maven-enforcer-rules.version>3.1.0</ossindex-maven-enforcer-rules.version>
 
 		<!--maven-failsafe-plugin-->
 		<maven-failsafe-plugin.argLine/>
@@ -86,6 +86,8 @@
 		<!--maven-pmd-plugin-->
 		<maven-pmd-plugin.failOnViolation>true</maven-pmd-plugin.failOnViolation>
 		<maven-pmd-plugin.printFailingErrors>true</maven-pmd-plugin.printFailingErrors>
+		<maven-pmd-plugin.pmd-core.version>6.24.0</maven-pmd-plugin.pmd-core.version>
+		<maven-pmd-plugin.pmd-java.version>6.24.0</maven-pmd-plugin.pmd-java.version>
 
 		<!--maven-surefire-plugin-->
 		<maven-surefire-plugin.argLine/>
@@ -278,6 +280,16 @@
 						</execution>
 					</executions>
 					<dependencies>
+						<dependency>
+							<groupId>net.sourceforge.pmd</groupId>
+							<artifactId>pmd-core</artifactId>
+							<version>${maven-pmd-plugin.pmd-core.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>net.sourceforge.pmd</groupId>
+							<artifactId>pmd-java</artifactId>
+							<version>${maven-pmd-plugin.pmd-java.version}</version>
+						</dependency>
 						<dependency>
 							<groupId>com.bondarenko.platform</groupId>
 							<artifactId>platform-code-quality-java11</artifactId>
