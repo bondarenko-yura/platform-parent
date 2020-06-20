@@ -24,6 +24,7 @@
 		<platform-code-quality-java11.version>0.0.1-SNAPSHOT</platform-code-quality-java11.version>
 
 		<!--DEPENDENCIES EXTERNAL-->
+		<javers-core.version>5.9.1</javers-core.version>
 		<junit-bom.version>5.6.2</junit-bom.version>
 		<spring-boot-dependencies.version>2.3.0.RELEASE</spring-boot-dependencies.version>
 		<spring-framework-bom.version>5.2.6.RELEASE</spring-framework-bom.version>
@@ -42,6 +43,7 @@
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 		<maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
 		<maven-jxr-plugin.version>2.5</maven-jxr-plugin.version>
+		<maven-pitest-plugin.version>1.5.2</maven-pitest-plugin.version>
 		<maven-pmd-plugin.version>3.13.0</maven-pmd-plugin.version>
 		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
 		<maven-site-plugin.version>3.9.0</maven-site-plugin.version>
@@ -56,6 +58,7 @@
 		<maven-checkstyle-plugin.skip>false</maven-checkstyle-plugin.skip>
 		<maven-enforcer-plugin.skip>false</maven-enforcer-plugin.skip>
 		<maven-failsafe-plugin.skipTests>false</maven-failsafe-plugin.skipTests>
+		<maven-pitest-plugin.skipTests>false</maven-pitest-plugin.skipTests>
 		<maven-pmd-plugin.skip>false</maven-pmd-plugin.skip>
 		<maven-surefire-plugin.skipTests>false</maven-surefire-plugin.skipTests>
 		<spotbugs-maven-plugin.skip>false</spotbugs-maven-plugin.skip>
@@ -99,6 +102,11 @@
 
 		<!--versions-maven-plugin-->
 		<versions-maven-plugin.dependency.version.upgrade.phase>none</versions-maven-plugin.dependency.version.upgrade.phase>
+
+		<!--maven-pitest-plugin-->
+		<maven-pitest-plugin.coverageThreshold>80</maven-pitest-plugin.coverageThreshold>
+		<maven-pitest-plugin.mutationThreshold>80</maven-pitest-plugin.mutationThreshold>
+		<maven-pitest-junit5-plugin.version>0.12</maven-pitest-junit5-plugin.version>
 	</properties>
 
 	<profiles>
@@ -145,6 +153,11 @@
 				<version>${junit-bom.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.javers</groupId>
+				<artifactId>javers-core</artifactId>
+				<version>${javers-core.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -220,6 +233,42 @@
 							</goals>
 						</execution>
 					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.pitest</groupId>
+					<artifactId>pitest-maven</artifactId>
+					<version>${maven-pitest-plugin.version}</version>
+					<configuration>
+						<skipTests>${maven-pitest-plugin.skipTests}</skipTests>
+						<targetClasses>
+							<param>com.bondarenko.*</param>
+						</targetClasses>
+						<targetTests>
+							<param>com.bondarenko.**Test</param>
+						</targetTests>
+						<avoidCallsTo>
+							<avoidCallsTo>org.slf4j</avoidCallsTo>
+						</avoidCallsTo>
+						<verbose>false</verbose>
+						<coverageThreshold>${maven-pitest-plugin.coverageThreshold}</coverageThreshold>
+						<mutationThreshold>${maven-pitest-plugin.mutationThreshold}</mutationThreshold>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>test</phase>
+							<goals>
+								<goal>mutationCoverage</goal>
+							</goals>
+						</execution>
+					</executions>
+					<dependencies>
+						<dependency>
+							<groupId>org.pitest</groupId>
+							<artifactId>pitest-junit5-plugin</artifactId>
+							<version>${maven-pitest-junit5-plugin.version}</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 
 				<plugin>
@@ -691,6 +740,10 @@
 			<plugin>
 				<groupId>com.github.spotbugs</groupId>
 				<artifactId>spotbugs-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
 			</plugin>
 		</plugins>
 	</build>
