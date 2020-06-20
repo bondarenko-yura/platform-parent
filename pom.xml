@@ -669,6 +669,7 @@
 					<version>${maven-changes-plugin.version}</version>
 					<configuration>
 						<skip>${maven-changes-plugin.skip}</skip>
+						<xmlPath>_changes/changes.xml</xmlPath>
 						<inputEncoding>${project.build.sourceEncoding}</inputEncoding>
 						<outputEncoding>${project.build.sourceEncoding}</outputEncoding>
 						<failOnError>true</failOnError>
