@@ -24,10 +24,10 @@
 		<platform-code-quality-java11.version>0.0.1-SNAPSHOT</platform-code-quality-java11.version>
 
 		<!--DEPENDENCIES EXTERNAL-->
-		<javers-core.version>5.10.1</javers-core.version>
+		<javers-core.version>5.11.1</javers-core.version>
 		<junit-bom.version>5.6.2</junit-bom.version>
 		<spring-boot-dependencies.version>2.3.1.RELEASE</spring-boot-dependencies.version>
-		<spring-framework-bom.version>5.2.7.RELEASE</spring-framework-bom.version>
+		<spring-framework-bom.version>5.2.8.RELEASE</spring-framework-bom.version>
 
 		<!--PLUGINS-->
 		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
@@ -687,6 +687,11 @@
 					</executions>
 				</plugin>
 
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring-boot-dependencies.version}</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 
@@ -745,6 +750,13 @@
 			<plugin>
 				<groupId>org.pitest</groupId>
 				<artifactId>pitest-maven</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
