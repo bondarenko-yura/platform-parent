@@ -28,6 +28,7 @@
 		<junit-bom.version>5.6.2</junit-bom.version>
 		<spring-boot-dependencies.version>2.3.1.RELEASE</spring-boot-dependencies.version>
 		<spring-framework-bom.version>5.2.8.RELEASE</spring-framework-bom.version>
+		<lombok.version>1.18.12</lombok.version>
 
 		<!--PLUGINS-->
 		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
@@ -159,6 +160,11 @@
 				<artifactId>javers-core</artifactId>
 				<version>${javers-core.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -181,6 +187,13 @@
 						<showDeprecation>true</showDeprecation>
 						<showWarnings>true</showWarnings>
 						<optimize>true</optimize>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+								<version>${lombok.version}</version>
+							</path>
+						</annotationProcessorPaths>
 					</configuration>
 				</plugin>
 
