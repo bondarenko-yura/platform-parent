@@ -79,7 +79,6 @@
 		<!--maven-checkstyle-plugin-->
 		<maven-checkstyle-plugin.failOnViolation>true</maven-checkstyle-plugin.failOnViolation>
 		<maven-checkstyle-plugin.logViolationsToConsole>true</maven-checkstyle-plugin.logViolationsToConsole>
-		<maven-checkstyle-plugin.checkstyle.rules.version>8.43</maven-checkstyle-plugin.checkstyle.rules.version>
 
 		<!--maven-enforcer-plugin-->
 		<maven-enforcer-plugin.enforce-release-rules.phase>none</maven-enforcer-plugin.enforce-release-rules.phase>
@@ -288,7 +287,6 @@
 					<artifactId>maven-checkstyle-plugin</artifactId>
 					<version>${maven-checkstyle-plugin.version}</version>
 					<configuration>
-						<configLocation>/checkstyle/checkstyle.xml</configLocation>
 						<encoding>${project.build.sourceEncoding}</encoding>
 						<consoleOutput>true</consoleOutput>
 						<failsOnError>true</failsOnError>
@@ -296,29 +294,41 @@
 						<logViolationsToConsole>${maven-checkstyle-plugin.logViolationsToConsole}</logViolationsToConsole>
 						<violationSeverity>warning</violationSeverity>
 						<linkXRef>true</linkXRef>
-						<includeTestSourceDirectory>true</includeTestSourceDirectory>
 						<skip>${maven-checkstyle-plugin.skip}</skip>
 					</configuration>
 					<executions>
-						<!--todo include tests-->
 						<execution>
 							<id>checkstyle-validate</id>
 							<phase>validate</phase>
 							<goals>
 								<goal>check</goal>
 							</goals>
+							<configuration>
+								<sourceDirectories>${project.build.sourceDirectory}</sourceDirectories>
+								<includeTestSourceDirectory>false</includeTestSourceDirectory>
+								<configLocation>/checkstyle/checkstyle.xml</configLocation>
+							</configuration>
+						</execution>
+						<execution>
+							<id>checkstyle-validate-test</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>check</goal>
+							</goals>
+							<configuration>
+								<sourceDirectories/>
+								<testSourceDirectories>${project.build.testSourceDirectory}</testSourceDirectories>
+								<includeTestSourceDirectory>true</includeTestSourceDirectory>
+								<configLocation>/checkstyle/checkstyle-test.xml</configLocation>
+							</configuration>
 						</execution>
 					</executions>
 					<dependencies>
 						<dependency>
-							<groupId>com.puppycrawl.tools</groupId>
-							<artifactId>checkstyle</artifactId>
-							<version>${maven-checkstyle-plugin.checkstyle.rules.version}</version>
-						</dependency>
-						<dependency>
 							<groupId>com.bondarenko.platform</groupId>
 							<artifactId>platform-code-quality-java11</artifactId>
 							<version>${platform-code-quality-java11.version}</version>
+							<classifier>jar-with-dependencies</classifier>
 						</dependency>
 					</dependencies>
 				</plugin>
