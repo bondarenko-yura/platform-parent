@@ -79,6 +79,7 @@
 		<!--maven-checkstyle-plugin-->
 		<maven-checkstyle-plugin.failOnViolation>true</maven-checkstyle-plugin.failOnViolation>
 		<maven-checkstyle-plugin.logViolationsToConsole>true</maven-checkstyle-plugin.logViolationsToConsole>
+		<maven-checkstyle-plugin.checkstyle.rules.version>8.43</maven-checkstyle-plugin.checkstyle.rules.version>
 
 		<!--maven-enforcer-plugin-->
 		<maven-enforcer-plugin.enforce-release-rules.phase>none</maven-enforcer-plugin.enforce-release-rules.phase>
@@ -91,8 +92,8 @@
 		<!--maven-pmd-plugin-->
 		<maven-pmd-plugin.failOnViolation>true</maven-pmd-plugin.failOnViolation>
 		<maven-pmd-plugin.printFailingErrors>true</maven-pmd-plugin.printFailingErrors>
-		<maven-pmd-plugin.pmd-core.version>6.24.0</maven-pmd-plugin.pmd-core.version>
-		<maven-pmd-plugin.pmd-java.version>6.24.0</maven-pmd-plugin.pmd-java.version>
+		<maven-pmd-plugin.pmd-core.version>6.35.0</maven-pmd-plugin.pmd-core.version>
+		<maven-pmd-plugin.pmd-java.version>6.35.0</maven-pmd-plugin.pmd-java.version>
 
 		<!--maven-surefire-plugin-->
 		<maven-surefire-plugin.argLine/>
@@ -325,10 +326,14 @@
 					</executions>
 					<dependencies>
 						<dependency>
+							<groupId>com.puppycrawl.tools</groupId>
+							<artifactId>checkstyle</artifactId>
+							<version>${maven-checkstyle-plugin.checkstyle.rules.version}</version>
+						</dependency>
+						<dependency>
 							<groupId>com.bondarenko.platform</groupId>
 							<artifactId>platform-code-quality-java11</artifactId>
 							<version>${platform-code-quality-java11.version}</version>
-							<classifier>jar-with-dependencies</classifier>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -348,6 +353,7 @@
 						<rulesets>
 							<ruleset>/pmd/ruleset.xml</ruleset>
 						</rulesets>
+						<!--todo separate test ruleset-->
 					</configuration>
 					<executions>
 						<execution>
