@@ -50,7 +50,7 @@
 		<maven-site-plugin.version>3.9.0</maven-site-plugin.version>
 		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
 		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-		<spotbugs-maven-plugin.version>4.0.0</spotbugs-maven-plugin.version>
+		<spotbugs-maven-plugin.version>4.2.3</spotbugs-maven-plugin.version>
 		<versions-maven-plugin.version>2.7</versions-maven-plugin.version>
 
 		<!--SKIPS-->
@@ -98,7 +98,7 @@
 		<maven-surefire-plugin.argLine/>
 
 		<!--spotbugs-maven-plugin-->
-		<spotbugs-maven-plugin.spotbugs.version>4.0.3</spotbugs-maven-plugin.spotbugs.version>
+		<spotbugs-maven-plugin.spotbugs.version>4.2.3</spotbugs-maven-plugin.spotbugs.version>
 
 		<!--versions-maven-plugin-->
 		<versions-maven-plugin.dependency.version.upgrade.phase>none</versions-maven-plugin.dependency.version.upgrade.phase>
@@ -361,6 +361,7 @@
 					</configuration>
 					<executions>
 						<execution>
+							<phase>pre-integration-test</phase>
 							<goals>
 								<goal>check</goal>
 								<goal>cpd-check</goal>
@@ -397,16 +398,27 @@
 					<version>${spotbugs-maven-plugin.version}</version>
 					<configuration>
 						<skip>${spotbugs-maven-plugin.skip}</skip>
+						<spotbugsXmlOutput>true</spotbugsXmlOutput>
+						<spotbugsXmlOutputDirectory>${project.build.directory}/spotbugs</spotbugsXmlOutputDirectory>
+						<excludeFilterFile>/spotbug/exclude-find-bugs-filter.xml</excludeFilterFile>
+						<spotbugsXmlOutputFilename>source-check.xml</spotbugsXmlOutputFilename>
 						<includeTests>true</includeTests>
 					</configuration>
 					<executions>
 						<execution>
+							<id>spotbugs-check</id>
+							<phase>pre-integration-test</phase>
 							<goals>
 								<goal>check</goal>
 							</goals>
 						</execution>
 					</executions>
 					<dependencies>
+						<dependency>
+							<groupId>com.bondarenko.platform</groupId>
+							<artifactId>platform-code-quality-java11</artifactId>
+							<version>${platform-code-quality-java11.version}</version>
+						</dependency>
 						<dependency>
 							<groupId>com.github.spotbugs</groupId>
 							<artifactId>spotbugs</artifactId>
