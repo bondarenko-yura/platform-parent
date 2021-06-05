@@ -34,7 +34,7 @@
 		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
 		<maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
 		<maven-changes-plugin.version>2.12.1</maven-changes-plugin.version>
-		<maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
+		<maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
 		<maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
@@ -307,8 +307,8 @@
 								<sourceDirectories>${project.build.sourceDirectory}</sourceDirectories>
 								<includeTestSourceDirectory>false</includeTestSourceDirectory>
 								<configLocation>/checkstyle/checkstyle.xml</configLocation>
-								<outputFile>${project.build.directory}/checkstyle-result.xml</outputFile>
-								<cacheFile>${project.build.directory}/checkstyle-cache</cacheFile>
+								<outputFile>${project.build.directory}/checkstyle/checkstyle-result.xml</outputFile>
+								<cacheFile>${project.build.directory}/checkstyle/checkstyle-cache</cacheFile>
 							</configuration>
 						</execution>
 						<execution>
@@ -322,8 +322,8 @@
 								<testSourceDirectories>${project.build.testSourceDirectory}</testSourceDirectories>
 								<includeTestSourceDirectory>true</includeTestSourceDirectory>
 								<configLocation>/checkstyle/checkstyle-test.xml</configLocation>
-								<outputFile>${project.build.directory}/checkstyle-result-test.xml</outputFile>
-								<cacheFile>${project.build.directory}/checkstyle-cache-test</cacheFile>
+								<outputFile>${project.build.directory}/checkstyle/checkstyle-result-test.xml</outputFile>
+								<cacheFile>${project.build.directory}/checkstyle/checkstyle-cache-test</cacheFile>
 							</configuration>
 						</execution>
 					</executions>
@@ -348,10 +348,12 @@
 						<skip>${maven-pmd-plugin.skip}</skip>
 						<linkXRef>true</linkXRef>
 						<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-						<minimumTokens>100</minimumTokens>
+						<minimumTokens>60</minimumTokens>
 						<targetJdk>${project.java.version}</targetJdk>
 						<printFailingErrors>${maven-pmd-plugin.printFailingErrors}</printFailingErrors>
 						<failOnViolation>${maven-pmd-plugin.failOnViolation}</failOnViolation>
+						<outputDirectory>${project.build.directory}/pmd</outputDirectory>
+						<targetDirectory>${project.build.directory}/pmd</targetDirectory>
 						<includeTests>true</includeTests>
 						<rulesets>
 							<ruleset>/pmd/ruleset.xml</ruleset>
