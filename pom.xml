@@ -307,6 +307,8 @@
 								<sourceDirectories>${project.build.sourceDirectory}</sourceDirectories>
 								<includeTestSourceDirectory>false</includeTestSourceDirectory>
 								<configLocation>/checkstyle/checkstyle.xml</configLocation>
+								<outputFile>${project.build.directory}/checkstyle-result.xml</outputFile>
+								<cacheFile>${project.build.directory}/checkstyle-cache</cacheFile>
 							</configuration>
 						</execution>
 						<execution>
@@ -320,6 +322,8 @@
 								<testSourceDirectories>${project.build.testSourceDirectory}</testSourceDirectories>
 								<includeTestSourceDirectory>true</includeTestSourceDirectory>
 								<configLocation>/checkstyle/checkstyle-test.xml</configLocation>
+								<outputFile>${project.build.directory}/checkstyle-result-test.xml</outputFile>
+								<cacheFile>${project.build.directory}/checkstyle-cache-test</cacheFile>
 							</configuration>
 						</execution>
 					</executions>
@@ -357,6 +361,7 @@
 						<execution>
 							<goals>
 								<goal>check</goal>
+								<goal>cpd-check</goal>
 							</goals>
 						</execution>
 					</executions>
