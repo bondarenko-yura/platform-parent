@@ -398,6 +398,9 @@
 					<version>${spotbugs-maven-plugin.version}</version>
 					<configuration>
 						<skip>${spotbugs-maven-plugin.skip}</skip>
+						<effort>Max</effort>
+						<threshold>Low</threshold>
+						<failOnError>true</failOnError>
 						<spotbugsXmlOutput>true</spotbugsXmlOutput>
 						<spotbugsXmlOutputDirectory>${project.build.directory}/spotbugs</spotbugsXmlOutputDirectory>
 						<excludeFilterFile>/spotbug/exclude-find-bugs-filter.xml</excludeFilterFile>
