@@ -92,8 +92,7 @@
 		<!--maven-pmd-plugin-->
 		<maven-pmd-plugin.failOnViolation>true</maven-pmd-plugin.failOnViolation>
 		<maven-pmd-plugin.printFailingErrors>true</maven-pmd-plugin.printFailingErrors>
-		<maven-pmd-plugin.pmd-core.version>6.35.0</maven-pmd-plugin.pmd-core.version>
-		<maven-pmd-plugin.pmd-java.version>6.35.0</maven-pmd-plugin.pmd-java.version>
+		<maven-pmd-plugin.pmd-rules.version>6.35.0</maven-pmd-plugin.pmd-rules.version>
 
 		<!--maven-surefire-plugin-->
 		<maven-surefire-plugin.argLine/>
@@ -353,7 +352,6 @@
 						<rulesets>
 							<ruleset>/pmd/ruleset.xml</ruleset>
 						</rulesets>
-						<!--todo separate test ruleset-->
 					</configuration>
 					<executions>
 						<execution>
@@ -366,12 +364,17 @@
 						<dependency>
 							<groupId>net.sourceforge.pmd</groupId>
 							<artifactId>pmd-core</artifactId>
-							<version>${maven-pmd-plugin.pmd-core.version}</version>
+							<version>${maven-pmd-plugin.pmd-rules.version}</version>
 						</dependency>
 						<dependency>
 							<groupId>net.sourceforge.pmd</groupId>
 							<artifactId>pmd-java</artifactId>
-							<version>${maven-pmd-plugin.pmd-java.version}</version>
+							<version>${maven-pmd-plugin.pmd-rules.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>net.sourceforge.pmd</groupId>
+							<artifactId>pmd-xml</artifactId>
+							<version>${maven-pmd-plugin.pmd-rules.version}</version>
 						</dependency>
 						<dependency>
 							<groupId>com.bondarenko.platform</groupId>
