@@ -83,7 +83,7 @@
 
 		<!--maven-enforcer-plugin-->
 		<maven-enforcer-plugin.enforce-release-rules.phase>none</maven-enforcer-plugin.enforce-release-rules.phase>
-		<extra-enforcer-rules.version>1.2</extra-enforcer-rules.version>
+		<extra-enforcer-rules.version>1.3</extra-enforcer-rules.version>
 		<ossindex-maven-enforcer-rules.version>3.1.0</ossindex-maven-enforcer-rules.version>
 
 		<!--maven-failsafe-plugin-->
@@ -618,12 +618,10 @@
 									<!--verifies that there are no circular dependencies in the project-->
 									<banCircularDependencies/>
 
-									<!--verifies that source files have a required encoding-->
-									<!--todo fix me on mac-->
-									<!--<requireEncoding>-->
-									<!--	<encoding>${project.build.sourceEncoding}</encoding>-->
-									<!--	<includes>src/main/resources/**,src/test/resources/**,pom.xml</includes>-->
-									<!--</requireEncoding>-->
+									<!--verifies that there are no classes in dependencies having bytecode versions higher than specified-->
+									<enforceBytecodeVersion>
+										<maxJdkVersion>${project.java.version}</maxJdkVersion>
+									</enforceBytecodeVersion>
 
 									<!--RULES FROM: ossindex-maven-enforcer-rules-->
 									<banVulnerable
