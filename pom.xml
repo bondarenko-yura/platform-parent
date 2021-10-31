@@ -672,7 +672,13 @@
 									</requireMavenVersion>
 
 									<!--verifies that there are no duplicate classes in the dependencies-->
-									<banDuplicateClasses/>
+									<banDuplicateClasses>
+										<scopes>
+											<scope>compile</scope>
+											<scope>provided</scope>
+										</scopes>
+										<ignoreWhenIdentical>true</ignoreWhenIdentical>
+									</banDuplicateClasses>
 
 									<!--verifies that there are no circular dependencies in the project-->
 									<banCircularDependencies/>
