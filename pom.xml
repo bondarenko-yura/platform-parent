@@ -20,6 +20,7 @@
 		<platform-code-quality-java11.version>0.0.1-SNAPSHOT</platform-code-quality-java11.version>
 
 		<!--DEPENDENCIES EXTERNAL-->
+		<archunit.version>0.22.0</archunit.version>
 		<javers-core.version>6.4.2</javers-core.version>
 		<junit-bom.version>5.8.1</junit-bom.version>
 		<lombok.version>1.18.22</lombok.version>
@@ -185,6 +186,11 @@
 				<groupId>org.javers</groupId>
 				<artifactId>javers-core</artifactId>
 				<version>${javers-core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.tngtech.archunit</groupId>
+				<artifactId>archunit</artifactId>
+				<version>${archunit.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projectlombok</groupId>
