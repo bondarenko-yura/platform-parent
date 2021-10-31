@@ -7,10 +7,6 @@
 	<groupId>com.bondarenko.platform</groupId>
 	<artifactId>platform-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-
-	<name>Platform :: Parent pom</name>
-
 	<properties>
 		<!--PLEASE KEEP ALPHABETICAL ORDER IN EACH GROUP-->
 
@@ -32,7 +28,7 @@
 		<spring-framework-bom.version>5.3.12</spring-framework-bom.version>
 
 		<!--PLUGINS-->
-		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+		<jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
 		<maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
 		<maven-changes-plugin.version>2.12.1</maven-changes-plugin.version>
 		<maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
@@ -85,9 +81,15 @@
 		</jacoco-maven-plugin.excludes>
 
 		<!--maven-pitest-plugin-->
+		<!--to match multiple globs use '|'. example: *.dto.*|*.config.*|*.domain.*-->
+		<maven-pitest-junit5-plugin.version>0.15</maven-pitest-junit5-plugin.version>
 		<maven-pitest-plugin.coverageThreshold>80</maven-pitest-plugin.coverageThreshold>
 		<maven-pitest-plugin.mutationThreshold>80</maven-pitest-plugin.mutationThreshold>
-		<maven-pitest-junit5-plugin.version>0.12</maven-pitest-junit5-plugin.version>
+		<maven-pitest-plugin.targetClasses>com.bondarenko.*</maven-pitest-plugin.targetClasses>
+		<maven-pitest-plugin.targetTests>com.bondarenko.*</maven-pitest-plugin.targetTests>
+		<maven-pitest-plugin.avoidCallsTo>org.slf4j</maven-pitest-plugin.avoidCallsTo>
+		<maven-pitest-plugin.excludedClasses/>
+		<maven-pitest-plugin.excludedTestClasses/>
 
 		<!--maven-checkstyle-plugin-->
 		<maven-checkstyle-plugin.failOnViolation>true</maven-checkstyle-plugin.failOnViolation>
@@ -112,6 +114,10 @@
 		<versions-maven-plugin.dependency.version.upgrade.phase>none</versions-maven-plugin.dependency.version.upgrade.phase>
 	</properties>
 
+	<packaging>pom</packaging>
+
+	<name>Platform :: Parent pom</name>
+
 	<profiles>
 		<profile>
 			<id>update-dependencies</id>
@@ -120,6 +126,24 @@
 			</activation>
 			<properties>
 				<versions-maven-plugin.dependency.version.upgrade.phase>generate-sources</versions-maven-plugin.dependency.version.upgrade.phase>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>skip-code-quality</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<jacoco-maven-plugin.skip>false</jacoco-maven-plugin.skip>
+				<maven-changes-plugin.skip>false</maven-changes-plugin.skip>
+				<maven-checkstyle-plugin.skip>false</maven-checkstyle-plugin.skip>
+				<maven-enforcer-plugin.skip>false</maven-enforcer-plugin.skip>
+				<maven-failsafe-plugin.skipTests>false</maven-failsafe-plugin.skipTests>
+				<maven-pitest-plugin.skipTests>false</maven-pitest-plugin.skipTests>
+				<maven-pmd-plugin.skip>false</maven-pmd-plugin.skip>
+				<maven-surefire-plugin.skipTests>false</maven-surefire-plugin.skipTests>
+				<spotbugs-maven-plugin.skip>false</spotbugs-maven-plugin.skip>
 			</properties>
 		</profile>
 
@@ -194,6 +218,8 @@
 						<showDeprecation>true</showDeprecation>
 						<showWarnings>true</showWarnings>
 						<optimize>true</optimize>
+						<failOnError>true</failOnError>
+						<failOnWarning>true</failOnWarning>
 						<annotationProcessorPaths>
 							<path>
 								<groupId>org.projectlombok</groupId>
@@ -262,13 +288,19 @@
 					<configuration>
 						<skipTests>${maven-pitest-plugin.skipTests}</skipTests>
 						<targetClasses>
-							<param>com.bondarenko.*</param>
+							<param>${maven-pitest-plugin.targetClasses}</param>
 						</targetClasses>
 						<targetTests>
-							<param>com.bondarenko.**Test</param>
+							<param>${maven-pitest-plugin.targetTests}</param>
 						</targetTests>
+						<excludedClasses>
+							<param>${maven-pitest-plugin.excludedClasses}</param>
+						</excludedClasses>
+						<excludedTestClasses>
+							<param>${maven-pitest-plugin.excludedTestClasses}</param>
+						</excludedTestClasses>
 						<avoidCallsTo>
-							<avoidCallsTo>org.slf4j</avoidCallsTo>
+							<avoidCallsTo>${maven-pitest-plugin.avoidCallsTo}</avoidCallsTo>
 						</avoidCallsTo>
 						<verbose>false</verbose>
 						<coverageThreshold>${maven-pitest-plugin.coverageThreshold}</coverageThreshold>
@@ -840,5 +872,12 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+	<repositories>
+		<repository>
+			<id>apache</id>
+			<url>https://repository.apache.org</url>
+		</repository>
+	</repositories>
 
 </project>
