@@ -92,7 +92,7 @@
 		<!--maven-pmd-plugin-->
 		<maven-pmd-plugin.failOnViolation>true</maven-pmd-plugin.failOnViolation>
 		<maven-pmd-plugin.printFailingErrors>true</maven-pmd-plugin.printFailingErrors>
-		<maven-pmd-plugin.pmd-rules.version>6.35.0</maven-pmd-plugin.pmd-rules.version>
+		<maven-pmd-plugin.pmd-rules.version>7.10.0</maven-pmd-plugin.pmd-rules.version>
 
 		<!--maven-surefire-plugin-->
 		<maven-surefire-plugin.argLine/>
